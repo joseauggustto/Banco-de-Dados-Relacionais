@@ -1,0 +1,115 @@
+
+Introdução ao SQL. 
+----------
+
+Um banco de dados relacional é aquele onde linhas e colunas se relacionam em uma tabela. Amplamente usado pela sua confiabilidade de manter os
+dados seguros.
+
+As linhas registram dados individuais e as colunas representam o tipo do dado ou característica.
+
+Todas as tabelas em um banco de dados tem uma chave primária, que é um identificador único para cada linha.
+
+Os bancos de dados SQL mais comuns são: MySQL, PostgreSQL, SQLite e Microsoft SQL Server. 
+
+O freeCodeCamp recomenda usar a PostgreSQL, e eu já instalei no meu Mint, XD.
+
+---------
+Esquema - é a estrutura de um banco com suas tabelas, colunas, tipos de dados, restrições e relacionamentos.
+
+
+---------
+
+SQL significa Structured Query Language. Foi desenvolvida em 1970.
+
+Para entrar em um bando com a CLI: psql -h localhost -U < usuario > -d < banco de dados > -W
+
+---------
+
+No SQL, para definir uma tabela é necessário definir o tipo de dado de cada coluna. 
+
+Sintaxe básica para criar uma tabela em SQL:
+
+CREATE TABLE table_name (
+    coluna1 data_type restricao_coluna,
+    coluna2 data_type restricao_coluna,
+    coluna3 data_type restricao_coluna,
+    ... etc
+);
+
+--- Tipos de dados:
+
+units_sold INTEGER (Dados inteiros)
+
+name VARCHAR(50) (dados em texto, o numero define o limite)
+
+name TEXT (string de qualquer comprimento)
+
+event_date DATE (armazenar data de acontecimentos)
+
+start_time (aramazenar horário)
+
+event_timestamp TIMESTAMP (armazena data e hora)
+
+--------
+
+Instruções -
+
+CREATE TABLE - cria tabela
+INSERT INTO - insere valores na tabela já existente
+SELECT * FROM <tabela>; - vai mostrar todos os dados de uma tabela
+SELECT <coluna> FROM <tabela>; - vai mostrar colunas específicas
+SELECT * FROM <tabela> WHERE <coluna> < <valor específico>; - vai mostrar os dados de acordo com um critério específico de dados em uma coluna. 
+
+--------
+
+Chaves Primárias e Estrangeiras -
+
+São usadas para estabelecer relacionamento entre tabelas. 
+
+Chaves primárias são uma coluna ou um conjunto de colunas que identifica exclusivamente um registro (linha).
+
+Para tornar uma coluna chave primária é só colocar <nome_coluna> <tipo de dado> PRIMARY KEY assim. 
+
+Uma chave estrangeira é uma coluna ou conjunto de colunas em uma tabela, que referencia outra tabela.
+
+--------
+
+Tipos de relações -
+
+- um-pra-um -> um registro se relaciona com apenas um na segunda tabela.
+
+- um-pra-muito -> um registro em uma tabela se relaciona com um ou vários em outra tabela.
+
+- muitos-para-um -> vários registros de uma tabela se referem a um apenas, na outra
+
+- muitos-para-muito -> nesse tipo, é necessário uma tabela intermediária, porque a relação entre várias entidades pode ficar comprometida.
+
+--------
+
+Operações com JOIN - 
+
+Sintaxe básica do comando = SELECT * FROM products INNER JOIN sales ON products.product_id = sales.product_id;
+
+INNER JOIN = inclui todas as linhas com valores correspondentes das duas tabelas. 
+
+FULL OTHER JOIN = todas as linhas, sem excessões
+
+LEFT OTHER JOIN = todas as linhas da esquerda com as correspondentes da direita
+
+RIGHT OTHER JOIN = todas as linhas da direita com as correspondentes da esquerda
+
+SELF JOIN = unir a mesma tabela para comparar colunas
+
+CROSS JOIN = produto cartesiano de duas tabelas unindo as linhas com o mesmo indíce
+
+---------
+
+Comandos Específicos -
+
+Login = psql --username<username> --dbname=<base de dados> || psql -h localhost -U postgres -d postgres
+
+\l = listar todos os bancos de dados
+\c = se conectar ao banco de dados
+\d = lista todas as tabelas do banco de dados atual
+\q = sair 
+

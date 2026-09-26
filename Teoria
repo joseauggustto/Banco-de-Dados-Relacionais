@@ -113,3 +113,11 @@ Login = psql --username<username> --dbname=<base de dados> || psql -h localhost 
 \d = lista todas as tabelas do banco de dados atual
 \q = sair 
 
+--------
+
+Script Bash -
+
+Esse tópico fala sobre como é possível escrever códigos utilizáveis para automação e outras tarefas, a partir do bash.
+Eu mesmo já utilizei algumas vezes para criar códigos utilizáveis. 
+
+O bash não só suporta comandos, mas também uma linguagem completa. 

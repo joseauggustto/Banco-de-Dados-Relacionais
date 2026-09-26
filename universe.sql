@@ -1,3 +1,11 @@
+--Todo esse esquema de banco de dados foi criado por mim em uma atividade de Banco de Dados relacionais.
+--Ao longo da atividade eu não pude anotar os comados executados, mas no final ele me deu um resumo de todos os comandos e inserções.
+--Abaixo está o resumo de todos os comandos e inserções que foram executados para criar esse banco de dados. 
+
+--Disponibilizado por: freeCodeCamp 
+
+--------------------------------
+
 --
 -- PostgreSQL database dump
 --

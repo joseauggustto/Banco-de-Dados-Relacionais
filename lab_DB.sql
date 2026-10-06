@@ -18,6 +18,12 @@ INSERT INTO clientes (nome, email, idade, data_criacao) VALUES ('João Silva', '
 
 INSERT INTO clientes (nome, email, idade, data_criacao) VALUES ('Maria Oliveira', 'maria.oliveira@gmail.com', 29, NOW());
 
+INSERT INTO clientes (nome, email, idade, data_criacao) VALUES ('João Silva', 'joao.silva@gmail.com', 34, NOW()) ON CONFLICT (email) DO NOTHING;
+
+CREATE TABLE clientes_backup AS TABLE clientes WITH NO DATA; 
+
+INSERT INTO clientes_backup SELECT * FROM clientes WHERE idade > 20; 
+
 -- -----
 
 ALTER TABLE clientes ADD endereco VARCHAR(200);
@@ -61,11 +67,9 @@ CREATE TABLE regiao (
 DROP TABLE regiao;
 
 
-
+-- Finaliza aqui, por enquanto. 
 
 -- ######################## -- ########################
-
-
 
 
 
@@ -83,6 +87,8 @@ CREATE TABLE departamento (
 );
 
 ALTER TABLE departamento ADD localizacao VARCHAR(40);
+ALTER TABLE departamento ADD id_região NUMERIC(7) REFERENCES regiao2(id);
+
 
 -- Atividade 2 - Criação da tabela empregado 
 
@@ -98,3 +104,15 @@ CREATE TABLE empregado (
     id_departamento NUMERIC(7) REFERENCES departamento(id),
     id_gerente NUMERIC(7) REFERENCES gerente(id)
 );
+
+-- Atividade 3 - Criação da tabela regiao
+
+CREATE TABLE regiao2(
+    id NUMERIC(7) PRIMARY KEY NOT NULL,
+    nome VARCHAR(40)
+);
+
+DROP TABLE regiao2;
+DROP TABLE departamento;
+DROP TABLE empregado;
+

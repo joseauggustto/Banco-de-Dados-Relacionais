@@ -1,3 +1,6 @@
+- Tá meio bagunçado, mas é isso aí.
+
+
 -- \l para listar as bases de dados
 
 CREATE DATABASE nome_da_base; -- para criar uma nova base de dados

@@ -84,22 +84,3 @@ SELECT nome,
 FROM alunos;
 
 SELECT * FROM VTESTE; 
-
-
-
-
--- #############################################
-
-
-
-
--- Criação de um banco de dados para uma empresa, requisito da segunda atividade.
-
-
-CREATE DATABASE empresa; 
-
-\c empresa; 
-
-
-
-

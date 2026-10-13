@@ -13,7 +13,7 @@ CREATE TABLE funcionarios(
     turno VARCHAR(1) REFERENCES turnos(cod_turno),
     funcao VARCHAR(20),
     nome VARCHAR(50),
-    salario INT,
+    salario NUMERIC(10, 2),
     cpf VARCHAR(11) PRIMARY KEY
 );
 
@@ -26,8 +26,9 @@ CREATE TABLE saloes(
 CREATE TABLE alocacoes(
     hora_entrada VARCHAR(5),
     hora_saida VARCHAR(5),
-    numero_sl INT REFERENCES saloes(numero_sl),
-    cpf VARCHAR(11) REFERENCES funcionarios(cpf)
+    numero_sl INT,
+    cpf VARCHAR(11),
+    PRIMARY KEy (numero_sl, cpf)
 );
 
 -- ------
@@ -49,12 +50,12 @@ CREATE TABLE obras(
 CREATE TABLE pinturas(
     estilo VARCHAR(30),
     area NUMERIC(5, 2),
-    codigo INT REFERENCES obras(codigo)
+    codigo INT PRIMARY KEY REFERENCES obras(codigo)
 );
 
 CREATE TABLE esculturas(
     material VARCHAR(30),
     peso NUMERIC(4, 2),
     altura NUMERIC(4, 1),
-    codigo INT REFERENCES obras(codigo)
+    codigo INT PRIMARY KEY REFERENCES obras(codigo)
 );

@@ -63,3 +63,43 @@ FROM alunos;
                 
 -- --------
 
+SELECT
+    COUNT(*) AS "Número de Alunos",
+    MIN(EXTRACT(YEAR FROM AGE(dt_nascimento))) AS "Menor idade",
+    AVG(EXTRACT(YEAR FROM AGE(dt_nascimento))) AS "Idade média",
+    MAX(EXTRACT(YEAR FROM AGE(dt_nascimento))) AS "Maior idade",
+    SUM(EXTRACT(YEAR FROM AGE(dt_nascimento)))/COUNT(*) AS "Idade média"
+FROM alunos; 
+
+-- -------
+
+CREATE VIEW VTESTE AS 
+SELECT nome,
+    EXTRACT(YEAR FROM AGE(dt_nascimento))::INT AS "Idade do Aluno",
+    CASE 
+        WHEN EXTRACT(YEAR FROM AGE(dt_nascimento)) <= 20 THEN '1. Até 20 anos'
+        WHEN EXTRACT(YEAR FROM AGE(dt_nascimento)) BETWEEN 21 AND 30 THEN '2. 21 a 30 anos'
+        ELSE 'Não informado'
+    END AS "Faixa Etária"
+FROM alunos;
+
+SELECT * FROM VTESTE; 
+
+
+
+
+-- #############################################
+
+
+
+
+-- Criação de um banco de dados para uma empresa, requisito da segunda atividade.
+
+
+CREATE DATABASE empresa; 
+
+\c empresa; 
+
+
+
+

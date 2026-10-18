@@ -70,15 +70,15 @@ SELECT * FROM autores; -- Listar todo o conteúdo da tabela autores.
 
 SELECT nome, nacionalidade FROM autores; -- Listar nome e nacionalidade de autores. 
 
-SELECT cpf, nome, salario, salario * 12 FROM autores; 
+SELECT cpf, nome, salario, salario * 12 FROM funcionarios; 
 
-SELECT nome || "," || nacionalidade AS "Nome e nacionalidade" FROM autores;
+SELECT nome || ',' || nacionalidade AS "Nome e nacionalidade" FROM autores;
 
-SELECT nome || " " || nacionalidade FROM autores; 
+SELECT nome || ' ' || nacionalidade FROM autores; 
 
-SELECT AVG(area) AS "Área média", COUNT(*) saloes AS "Total salões" FROM saloes;
+SELECT AVG(area) AS "Área média", COUNT(*) AS "Total salões" FROM saloes;
 
-SELECT COUNT(*) pinturas AS "Total pinturas" FROM pinturas;
+SELECT COUNT(*) AS "Total pinturas" FROM pinturas;
 
 SELECT MAX(peso) AS "Maior peso" FROM esculturas;
 

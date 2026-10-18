@@ -100,4 +100,17 @@ SELECT
     MIN(ult_nome),
     MAX(dt_admissao),
     MIN(dt_admissao)
-FROM empregado;    -- Essa consulta não faz o menor sentido, mas ok.
+FROM empregado; 
+
+
+-- ------
+
+-- Vamos fazer mais algumas consultas...
+
+SELECT * FROM empregado WHERE id > 3; 
+
+SELECT id FROM cliente WHERE name='Ponto Quente';
+
+
+
+

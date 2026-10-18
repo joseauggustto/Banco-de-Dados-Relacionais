@@ -120,7 +120,7 @@ SELECT DISTINCT estilo FROM pinturas;
 
 -- -------
 
--- Consultas unindo tabelas, muito legal!  
+-- Consultas unindo tabelas com INNER JOIN, muito legal!  
 
 SELECT * FROM autores INNER JOIN obras ON autores.codigo = obras.autor;
 
@@ -135,3 +135,41 @@ SELECT a.nome, a.nacionalidade, o.titulo, p.estilo FROM autores a INNER JOIN obr
 SELECT o.titulo, p.estilo FROM obras o INNER JOIN pinturas p USING(codigo);
 
 SELECT o.titulo, p.estilo FROM obras o, pinturas p WHERE o.codigo = p.codigo;
+
+-- ------
+
+-- Agora consultas com junção a direita ou a esquerda.
+
+SELECT a.nome, a.nacionalidade FROM autores a LEFT JOIN obras o ON a.codigo = o.autor WHERE o.codigo IS NULL; 
+
+SELECT s.* FROM saloes s LEFT JOIN obras o ON s.numero_sl = o.salao WHERE o.salao IS NULL;
+
+SELECT o.codigo, o.titulo FROM obras o LEFT JOIN esculturas e ON o.codigo = e.codigo LEFT JOIN pinturas p ON o.codigo = p.codigo WHERE e.material = 'Argila' OR p.estilo = 'Impressionista';
+
+SELECT f.*, a.* FROM funcionarios f LEFT JOIN alocacoes a ON f.cpf = a.cpf;
+
+-- A boa prática nesse caso é ligar as tabelas com LEFT JOIN, pois a leitura fica da consulta fica bem mais simplificada.
+-- Usa-se o RIGHT JOIN em situações muito específicias. 
+
+-- -----
+-- Agora vamos para algumas consultas com subconsultas, let's!
+
+SELECT * FROM funcionarios WHERE salario > (SELECT AVG(salario) FROM funcionarios); 
+
+SELECT * FROM salao WHERE numero_sl IN(SELECT salao FROM obras);
+
+SELECT * FROM salao WHERE numero_sl NOT IN(SELECT salao FROM obras WHERE numero_sl IS NOT NULL);
+
+SELECT * FROM autores WHERE codigo NOT IN(SELECT autor FROM obras WHERE autor IS NOT NULL);
+
+SELECT * FROM funcionarios WHERE cpf IN(SELECT cpf FROM alocacoes);
+
+SELECT * FROM funcionarios WHERE cpf NOT IN(SELECT cpf FROM alocacoes);
+
+-- ------
+-- Agora algumas consultas mais complexas...
+
+SELECT * FROM saloes s WHERE area > (SELECT AVG(area) FROM saloes i WHERE s.andar = i.andar);
+
+SELECT * FROM autores a WHERE EXISTS(SELECT codigo FROM obras o WHERE o.autor = a.codigo);
+

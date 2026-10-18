@@ -84,5 +84,32 @@ SELECT MAX(peso) AS "Maior peso" FROM esculturas;
 
 SELECT MIN(titulo) FROM obras;
 
+-- ------
+
+-- Algumas consultas mais específicas. 
+
+SELECT * FROM autores WHERE codigo > 105; 
+
+SELECT * FROM autores WHERE codigo > 105 AND nacionalidade = 'francesa';
+
+SELECT * FROM autores WHERE nacionalidade IN('francesa', 'brasileira'); 
+
+SELECT * FROM autores WHERE codigo BETWEEN 104 AND 107;
+
+SELECT * FROM autores WHERE nome LIKE '%Dali%';
+
+SELECT * FROM saloes WHERE area IS NULL;
+
+SELECT * FROM autores ORDER BY nacionalidade DESC;
+
+SELECT * FROM autores ORDER BY nacionalidade ASC, codigo DESC;
+
+SELECT * FROM autores ORDER BY 3 ASC, 1 DESC; -- Esse comando faz a mesma coisa do anterior. Mas, em vez de usar o nome, usa-se o index da coluna.
+
+
+
+
+
+
 
 

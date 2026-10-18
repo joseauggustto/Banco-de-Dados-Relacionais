@@ -1,7 +1,5 @@
 CREATE DATABASE museu;
 
-\c museu;
-
 -- ------
 
 CREATE TABLE turnos(
@@ -63,7 +61,7 @@ CREATE TABLE esculturas(
 -- -------
 
 -- Nessa parte do código deveria haver alguns INSERT's. Entretanto, para questões de poupar tempo, iremos simular que temos alguns dados.
--- Dados de Funcionários, salões, obras e etc, poderão ocorrer em um momento posterior.
+-- Dados de Funcionários, salões, obras e etc, poderão ser inseridos em um momento posterior.
 -- Let's go!
 
 SELECT * FROM autores; -- Listar todo o conteúdo da tabela autores. 
@@ -106,10 +104,19 @@ SELECT * FROM autores ORDER BY nacionalidade ASC, codigo DESC;
 
 SELECT * FROM autores ORDER BY 3 ASC, 1 DESC; -- Esse comando faz a mesma coisa do anterior. Mas, em vez de usar o nome, usa-se o index da coluna.
 
+-- ---------
 
+-- Mais algumas consultas. 
 
+SELECT AVG(area) AS "Área média", COUNT(*) AS "Total Salões" FROM saloes;
 
+SELECT estilo, COUNT(*) "Quantidade pinturas" FROM pinturas GROUP BY estilo;
 
+SELECT estilo, COUNT(*) "Quantidade pinturas" FROM pinturas WHERE estilo<> 'cubista' GROUP BY estilo;
+
+SELECT estilo, COUNT(*) "Quantidade pinturas" FROM pinturas WHERE estilo <> 'cubista' GROUP BY estilo HAVING COUNT(*) >=2;
+
+SELECT DISTINCT estilo FROM pinturas;  
 
 
 

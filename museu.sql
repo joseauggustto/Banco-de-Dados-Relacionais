@@ -118,5 +118,20 @@ SELECT estilo, COUNT(*) "Quantidade pinturas" FROM pinturas WHERE estilo <> 'cub
 
 SELECT DISTINCT estilo FROM pinturas;  
 
+-- -------
 
+-- Consultas unindo tabelas, muito legal!  
 
+SELECT * FROM autores INNER JOIN obras ON autores.codigo = obras.autor;
+
+SELECT o.codigo, o.titulo, a.nome FROM autores a INNER JOIN obras o ON a.codigo = o.autor WHERE ano BETWEEN 1965 AND 1975 AND salao = 36;
+
+SELECT DISTINCT nome, nacionalidade FROM autores INNER JOIN obras ON autores.codigo = obras.autor;
+
+SELECT a.codigo, o.titulo FROM autores a INNER JOIN obras o ON a.codigo = o.autor INNER JOIN saloes s ON s.numero_sl = o.salao WHERE a.nome = 'Pablo Picasso' AND s.andar = 3;
+
+SELECT a.nome, a.nacionalidade, o.titulo, p.estilo FROM autores a INNER JOIN obras o ON a.codigo = o.autor INNER JOIN pinturas p ON p.codigo = o.codigo;
+
+SELECT o.titulo, p.estilo FROM obras o INNER JOIN pinturas p USING(codigo);
+
+SELECT o.titulo, p.estilo FROM obras o, pinturas p WHERE o.codigo = p.codigo;

@@ -1,8 +1,3 @@
-CREATE DATABASE museu;
--- -------
-
--- Nessa parte do código deveria haver alguns INSERT's. Entretanto, para questões de poupar tempo, iremos simular que temos alguns dados.
--- Dados de Funcionários, salões, obras e etc, poderão ser inseridos em um momento posterior.
 -- Let's go!
 
 SELECT * FROM autores; -- Listar todo o conteúdo da tabela autores. 
@@ -119,3 +114,56 @@ SELECT * FROM autores a WHERE NOT EXISTS (SELECT codigo FROM obras o WHERE o.aut
 SELECT * FROM autores a WHERE (SELECT COUNT(*) FROM obras o INNER JOIN pinturas p USING(codigo) WHERE o.autor = a.codigo) > (SELECT COUNT(*) FROM obras o INNER JOIN esculturas e USING(codigo) WHERE o.autor = a.codigo);
 
 -- Essa consulta de cima foi crazy.
+
+-- ------
+
+-- Consultas com operadores de conjunto.
+
+SELECT salao FROM obras UNION SELECT numero_sl FROM alocacoes; 
+
+SELECT salao FROM obras UNION ALL SELECT numero_sl FROM alocacoes;
+
+SELECT codigo FROM pinturas WHERE estilo = 'Impressionista' UNION SELECT codigo FROM esculturas WHERE material = 'Argila';
+
+SELECT codigo FROM pinturas WHERE estilo = 'Impressionista' UNION All SELECT codigo FROM esculturas WHERE material = 'Argila';
+
+SELECT o.titulo, a.nome 
+FROM autores a 
+INNER JOIN obras o ON o.autor = a.codigo 
+WHERE o.codigo IN(
+    SELECT codigo FROM pinturas WHERE estilo = 'Impressionista' 
+    UNION 
+    SELECT codigo FROM esculturas WHERE material = 'Argila'
+);
+
+-- ------
+-- Agora mais algumas consultas com conjuntos. 
+
+SELECT codigo FROM autores EXCEPT SELECT autor FROM obras;
+
+SELECT codigo FROM autores INTERSECT SELECT autor FROM obras;
+
+-- v1
+SELECT codigo FROM autores INTERSECT SELECT obras o FROM autor a INNER JOIN pinturas p ON o.codigo = p.codigo;
+
+-- v2 
+SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM pinturas) EXCEPT SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM esculturas);
+
+SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM esculturas) EXCEPT SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM pinturas);
+
+
+-- -----
+
+(
+    SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM pinturas)
+    EXCEPT
+    SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM esculturas)
+)
+
+UNION
+
+(
+    SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM esculturas)
+    EXCEPT
+    SELECT autor FROM obras WHERE codigo IN(SELECT codigo FROM pinturas)
+);

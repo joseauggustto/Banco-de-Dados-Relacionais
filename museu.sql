@@ -169,7 +169,12 @@ SELECT * FROM funcionarios WHERE cpf NOT IN(SELECT cpf FROM alocacoes);
 -- ------
 -- Agora algumas consultas mais complexas...
 
-SELECT * FROM saloes s WHERE area > (SELECT AVG(area) FROM saloes i WHERE s.andar = i.andar);
+SELECT * FROM saloes s WHERE > (SELECT AVG(area) FROM saloes r WHERE s.andar = r.andar);
 
-SELECT * FROM autores a WHERE EXISTS(SELECT codigo FROM obras o WHERE o.autor = a.codigo);
+SELECT * FROM autores a WHERE EXISTS (SELECT codigo FROM obras o WHERE o.autor = a.codigo); 
 
+SELECT * FROM autores a WHERE NOT EXISTS (SELECT codigo FROM obras o WHERE o.autor = a.codigo);
+
+SELECT * FROM autores a WHERE (SELECT COUNT(*) FROM obras o INNER JOIN pinturas p USING(codigo) WHERE o.autor = a.codigo) > (SELECT COUNT(*) FROM obras o INNER JOIN esculturas e USING(codigo) WHERE o.autor = a.codigo);
+
+-- Essa consulta de cima foi crazy.
